@@ -8,7 +8,24 @@
 </head>
 <body>
 
+    
     <style>
+        @keyframes disappear {
+            0%{
+                opacity:1;
+            }
+            100%{
+                opacity:0;
+            }
+        }
+        @keyframes loaded {
+            0%{
+                opacity:0;
+            }
+            100%{
+                opacity:1;
+            }
+        }
 
         ::selection{
             background: palevioletred;
@@ -18,9 +35,25 @@
             margin: 0;
         }
         body{
-            opacity : 1 !important;
+            overflow: hidden;
             background-color: #050505;
         }
+        *:not(body,html,#mio,#mio_logo){
+            opacity : 0;
+        }
+        #mio{
+            height: 100vh; /*無法變成 100% ，只能顯示成 100px*/
+            width: 100%;
+            background-color: aliceblue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #mio_logo{
+            width: 45vh;
+            height: auto;
+        }
+        
         #head-top{
             
             background-color: rgb(0, 0, 0);
@@ -48,6 +81,33 @@
             height: auto;
             margin-top  : 50px;
         }
+
+        #feet-top{
+            margin-top: 50px;
+            border-top-color: rgb(255, 72, 121);
+            border-top-style: solid ;
+            border-top-width: 2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background-color: rgb(0, 0, 0);
+            width: 100%;
+            height: 75px;
+            border-top-left-radius: 500px;
+            border-top-right-radius: 500px;
+            box-shadow: 0px -20px 50px #430016;
+            
+        }
+        #feet-bottom{
+            background-color: rgb(0, 0, 0);
+            width: 100%;
+            height: 15px;
+        }
+
+
+
+
         ._body_c{
             width: 100%;
             margin-top  : 50px;
@@ -58,10 +118,13 @@
 
 
         .content{
+            border-color: rgb(37, 37, 37);
+            border-style: solid ;
+            border-width: 2px;
             
             width: 85%;
             height: auto;
-            background-color: #141414;
+            background-color: #000000;
 
             box-shadow: 0px 0px 50px #272727;
             border-radius: 50px;
@@ -98,6 +161,10 @@
             color: white;
         }
     </style>
+    <div id = "mio" class="fr">
+        <img id="mio_logo" src="Mioprety-nobackground.svg">
+    </div>
+    
     <div id = "head">
         <div id = "head-top">
 
@@ -143,10 +210,81 @@
                 
             </div>
         </div>
+        <div class="_body_c">
+            <div class = "content">
+                <div class="cchild">
+                    <h1 class="bigHead">
+                        結尾。
+                    </h1>
+                </div>
+                <div class="cchild">
+                    <h1 class="mBody">
+                        或許，下次參訪時，能有更多東西？
+                    </h1>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+
+        <div id="feet">
+            <div id="feet-top">
+            
+            </div>
+            <div id="feet-bottom">
+            
+            </div>
+        </div>
 
         
     </div>
     
     
+
+    <script>
+       
+        
+        var printf = function(v){
+            console.log(v)
+        }
+
+        var mioprety_logo = function(){
+            
+            for (var i = 0; i < document.getElementById("mio").length; i++) {
+                
+            }
+        }
+        var loaded = function(){
+            
+            for (var i = 0; i < document.querySelectorAll("*").length; i++) {
+                var c = document.querySelectorAll("*")[i].className
+                
+                if (getComputedStyle(document.querySelectorAll("*")[i]).opacity === "0"){
+                        document.querySelectorAll("*")[i].style.animation = "loaded .4s"
+                        document.querySelectorAll("*")[i].style.opacity = "1";
+                    }
+               
+            }
+            document.querySelectorAll("body")[0].style.overflow = "visible"
+            
+        }
+        window.onload = function(){
+            setTimeout(() => {
+                document.body.scrollTop = 0; // For Safari
+                document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+            }, 1);
+            setTimeout(mioprety_logo(), 2);
+            
+            setTimeout(() => {
+                
+                document.getElementById("mio").style.animation = "disappear .4s 1"
+            }, 1500);
+            setTimeout(() => {
+                document.getElementById("mio").remove()
+            }, 1900);
+            setTimeout(loaded, 2000);
+        }
+    </script>
 </body>
 </html>
